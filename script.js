@@ -1,3 +1,7 @@
+let playerScore = 0;
+let computerScore = 0;
+
+/** コンピュータの手をランダムで生成するための関数 */
 function getRandomComputerResult() {
   const options = ["Rock", "Paper", "Scissors"];
   const optionIndex = Math.floor(Math.random() * options.length);
@@ -5,6 +9,7 @@ function getRandomComputerResult() {
 }
 console.log(getRandomComputerResult());
 
+/** Playerのじゃんけんの真偽を判定する処理 */
 function hasPlayerWonTheRound(player, computer) {
   if (player === "Rock" && computer === "Scissors") {
     return true;
@@ -14,5 +19,24 @@ function hasPlayerWonTheRound(player, computer) {
     return true;
   } else return false;
 }
-console.log(hasPlayerWonTheRound("Rock", "Scissors"));
-console.log(hasPlayerWonTheRound("Scissors", "Rock"));
+// console.log(hasPlayerWonTheRound("Rock", "Scissors"));
+// console.log(hasPlayerWonTheRound("Scissors", "Rock"));
+
+/** 勝敗の結果を取得するための関数 */
+function getRoundResults(userOption) {
+  const computerResult = getRandomComputerResult();
+  if (hasPlayerWonTheRound(userOption, computerResult)) {
+    playerScore = 1;
+    const playerWinMessage = `Player wins! ${userOption} beats ${computerResult}`;
+    return playerWinMessage;
+  } else if (userOption === computerResult) {
+    return `It's a tie! Both chose ${userOption}`;
+  } else {
+    computerScore = 1;
+    const computerWinMessage = `Computer wins! ${computerResult} beats ${userOption}`;
+    return computerWinMessage;
+  }
+}
+
+console.log(getRoundResults("Rock"));
+console.log("Player Score: ", playerScore, "Computer Score: ", computerScore);
