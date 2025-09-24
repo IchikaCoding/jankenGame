@@ -22,7 +22,7 @@ function hasPlayerWonTheRound(player, computer) {
 // console.log(hasPlayerWonTheRound("Rock", "Scissors"));
 // console.log(hasPlayerWonTheRound("Scissors", "Rock"));
 
-/** 勝敗の結果を取得するための関数 */
+/** 勝敗の結果のメッセージを取得するための関数 */
 function getRoundResults(userOption) {
   const computerResult = getRandomComputerResult();
   if (hasPlayerWonTheRound(userOption, computerResult)) {
@@ -38,5 +38,23 @@ function getRoundResults(userOption) {
   }
 }
 
-console.log(getRoundResults("Rock"));
+// console.log(getRoundResults("Rock"));
 console.log("Player Score: ", playerScore, "Computer Score: ", computerScore);
+
+// TODO どうしてletじゃないの？
+const playerScoreSpanElement = document.getElementById("player-score");
+const computerScoreSpanElement = document.getElementById("computer-score");
+const roundResultsMsg = document.getElementById("results-msg");
+
+/**
+ * PlayerとComputerのスコアと結果のメッセージを更新する処理
+ * @param {string} userOption
+ */
+function showResults(userOption) {
+  let resultMsg = getRoundResults(userOption);
+  playerScoreSpanElement.innerText = playerScore;
+  computerScoreSpanElement.innerText = computerScore;
+  roundResultsMsg.innerText = resultMsg;
+}
+
+showResults("Rock");
