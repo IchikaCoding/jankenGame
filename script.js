@@ -45,7 +45,9 @@ console.log("Player Score: ", playerScore, "Computer Score: ", computerScore);
 const playerScoreSpanElement = document.getElementById("player-score");
 const computerScoreSpanElement = document.getElementById("computer-score");
 const roundResultsMsg = document.getElementById("results-msg");
-
+let winnerMsgElement = document.getElementById("winner-msg");
+const optionsContainer = document.querySelector(".options-container");
+const resetGameBtn = document.getElementById("reset-game-btn");
 /**
  * PlayerとComputerのスコアと結果のメッセージを更新する処理
  * @param {string} userOption
@@ -55,6 +57,15 @@ function showResults(userOption) {
   playerScoreSpanElement.innerText = playerScore;
   computerScoreSpanElement.innerText = computerScore;
   roundResultsMsg.innerText = resultMsg;
+  if (playerScore === 3) {
+    winnerMsgElement = "Player has won the game!";
+    resetGameBtn.style.display = "block";
+    optionsContainer.style.display = "none";
+  } else if (computerScore === 3) {
+    winnerMsgElement = "Computer has won the game!";
+    resetGameBtn.style.display = "block";
+    optionsContainer.style.display = "none";
+  }
 }
 
 showResults("Rock");
