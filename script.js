@@ -1,11 +1,13 @@
 let playerScore = 0;
 let computerScore = 0;
+let isGameOver = false;
 
 /** コンピュータの手をランダムで生成するための関数 */
 function getRandomComputerResult() {
-  const options = ["Rock", "Paper", "Scissors"];
-  const optionIndex = Math.floor(Math.random() * options.length);
-  return options[optionIndex];
+  return "Scissors";
+  // const options = ["Rock", "Paper", "Scissors"];
+  // const optionIndex = Math.floor(Math.random() * options.length);
+  // return options[optionIndex];
 }
 console.log(getRandomComputerResult());
 
@@ -45,7 +47,7 @@ console.log("Player Score: ", playerScore, "Computer Score: ", computerScore);
 const playerScoreSpanElement = document.getElementById("player-score");
 const computerScoreSpanElement = document.getElementById("computer-score");
 const roundResultsMsg = document.getElementById("results-msg");
-let winnerMsgElement = document.getElementById("winner-msg");
+const winnerMsgElement = document.getElementById("winner-msg");
 const optionsContainer = document.querySelector(".options-container");
 const resetGameBtn = document.getElementById("reset-game-btn");
 /**
@@ -53,19 +55,31 @@ const resetGameBtn = document.getElementById("reset-game-btn");
  * @param {string} userOption
  */
 function showResults(userOption) {
+  if (isGameOver) {
+    console.log("実行回数超過しました");
+    return;
+  }
   let resultMsg = getRoundResults(userOption);
   playerScoreSpanElement.innerText = playerScore;
   computerScoreSpanElement.innerText = computerScore;
   roundResultsMsg.innerText = resultMsg;
+
   if (playerScore === 3) {
-    winnerMsgElement = "Player has won the game!";
+    isGameOver = true;
+    winnerMsgElement.innerText = "Player has won the game!";
     resetGameBtn.style.display = "block";
     optionsContainer.style.display = "none";
   } else if (computerScore === 3) {
-    winnerMsgElement = "Computer has won the game!";
+    isGameOver = true;
+    winnerMsgElement.innerText = "Computer has won the game!";
     resetGameBtn.style.display = "block";
     optionsContainer.style.display = "none";
   }
 }
 
 showResults("Rock");
+showResults("Rock");
+showResults("Rock");
+showResults("Rock");
+showResults("Rock");
+// addEventListener("click",);
