@@ -1,6 +1,5 @@
 let playerScore = 0;
 let computerScore = 0;
-let isGameOver = false;
 
 /** コンピュータの手をランダムで生成するための関数 */
 function getRandomComputerResult() {
@@ -55,26 +54,18 @@ const resetGameBtn = document.getElementById("reset-game-btn");
  * @param {string} userOption
  */
 function showResults(userOption) {
-  if (isGameOver) {
-    console.log("実行回数超過しました");
-    return;
-  }
-  let resultMsg = getRoundResults(userOption);
+  roundResultsMsg.innerText = getRoundResults(userOption);
   playerScoreSpanElement.innerText = playerScore;
   computerScoreSpanElement.innerText = computerScore;
-  roundResultsMsg.innerText = resultMsg;
 
-  if (playerScore === 3) {
-    isGameOver = true;
-    winnerMsgElement.innerText = "Player has won the game!";
-    resetGameBtn.style.display = "block";
-    optionsContainer.style.display = "none";
-  } else if (computerScore === 3) {
-    isGameOver = true;
-    winnerMsgElement.innerText = "Computer has won the game!";
-    resetGameBtn.style.display = "block";
-    optionsContainer.style.display = "none";
+  if (playerScore === 3 || computerScore === 3) {
+    winnerMsgElement.innerText = `${
+      playerScore === 3 ? "player" : "computer"
+    } has won the game.`;
   }
+
+  resetGameBtn.style.display = "block";
+  optionsContainer.style.display = "none";
 }
 
 showResults("Rock");
