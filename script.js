@@ -68,9 +68,30 @@ function showResults(userOption) {
   optionsContainer.style.display = "none";
 }
 
-showResults("Rock");
-showResults("Rock");
-showResults("Rock");
-showResults("Rock");
-showResults("Rock");
-// addEventListener("click",);
+function resetGame() {
+  playerScore = 0;
+  computerScore = 0;
+  playerScoreSpanElement.innerText = playerScore;
+  computerScoreSpanElement.innerText = computerScore;
+  resetGameBtn.style.display = "none";
+  optionsContainer.style.display = "block";
+  winnerMsgElement.innerText = "";
+  roundResultsMsg.innerText = "";
+}
+
+resetGameBtn.addEventListener("click", resetGame);
+
+// TODO　君の名は。
+const rockBtn = document.getElementById("rock-btn");
+const paperBtn = document.getElementById("paper-btn");
+const scissorsBtn = document.getElementById("scissors-btn");
+
+rockBtn.addEventListener("click", function () {
+  showResults("Rock");
+});
+paperBtn.addEventListener("click", function () {
+  showResults("Paper");
+});
+scissorsBtn.addEventListener("click", function () {
+  showResults("Scissors");
+});
